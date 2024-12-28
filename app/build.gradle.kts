@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -14,7 +16,14 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+    }
 
+    val localProperties = Properties()
+    val localPropertiesFile = File(rootDir, "local.properties")
+    if(localPropertiesFile.exists() && localPropertiesFile.isFile){
+        localPropertiesFile.inputStream().use {
+            localProperties.load(it)
+        }
     }
 
     buildTypes {
@@ -23,6 +32,18 @@ android {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
+            )
+            buildConfigField(
+                "String",
+                "NEWS_API_KEY",
+                localProperties.getProperty("NEWS_API_KEY")
+            )
+        }
+        debug{
+            buildConfigField(
+                "String",
+                "NEWS_API_KEY",
+                localProperties.getProperty("NEWS_API_KEY")
             )
         }
     }
@@ -34,6 +55,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }
@@ -50,8 +72,18 @@ dependencies {
     implementation(libs.androidx.tv.material)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.play.services.location)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    // Retrofit with Scalar Converter
+    implementation(libs.converter.scalars)
+
+    //New Api Dependency
+    implementation( libs.news.api.java)
+
 }
