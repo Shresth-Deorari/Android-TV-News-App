@@ -33,7 +33,6 @@ fun HomeScreen(innerPadding: PaddingValues, newsViewModel: NewsViewModel) {
     LaunchedEffect(Unit) {
         newsViewModel.getHeadlines("us")
     }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
