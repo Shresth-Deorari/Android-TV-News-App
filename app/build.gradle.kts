@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.circuithouseassignment"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -73,6 +73,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.play.services.location)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.runtime.livedata)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
@@ -82,8 +84,21 @@ dependencies {
     implementation(libs.retrofit)
     // Retrofit with Scalar Converter
     implementation(libs.converter.scalars)
+    //Retrofit Dependency for Gson Converter
+    implementation(libs.converter.gson)
 
-    //New Api Dependency
-    implementation( libs.news.api.java)
+    //News Api Dependency
+    implementation(libs.news.api.java)
 
+    //Room Database
+    implementation(libs.androidx.room.runtime)
+
+    //Okhttp
+    implementation(libs.okhttp)
+
+    // OkHttp Logging Interceptor
+    implementation(libs.logging.interceptor)
+
+    //Glide
+    implementation(libs.compose)
 }

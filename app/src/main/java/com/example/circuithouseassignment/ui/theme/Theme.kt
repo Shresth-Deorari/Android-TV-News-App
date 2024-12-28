@@ -7,7 +7,6 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.darkColorScheme
 import androidx.tv.material3.lightColorScheme
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun CircuitHouseAssignmentTheme(
     isInDarkTheme: Boolean = isSystemInDarkTheme(),
@@ -17,13 +16,15 @@ fun CircuitHouseAssignmentTheme(
         darkColorScheme(
             primary = Purple80,
             secondary = PurpleGrey80,
-            tertiary = Pink80
+            tertiary = Pink80,
+            background = BackgroundBlack
         )
     } else {
         lightColorScheme(
             primary = Purple40,
             secondary = PurpleGrey40,
-            tertiary = Pink40
+            tertiary = Pink40,
+            background = BackgroundWhite
         )
     }
     MaterialTheme(
