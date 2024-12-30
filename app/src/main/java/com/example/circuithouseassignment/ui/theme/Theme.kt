@@ -24,7 +24,7 @@ fun CircuitHouseAssignmentTheme(
             primary = Purple40,
             secondary = PurpleGrey40,
             tertiary = Pink40,
-            background = BackgroundWhite
+            background = BackgroundBlack
         )
     }
     MaterialTheme(

@@ -20,7 +20,7 @@ fun GlideImage(imageUrl: String?, modifier: Modifier = Modifier) {
         modifier = modifier,
         update = { imageView ->
             Glide.with(context)
-                .load(imageUrl?: R.string.default_image)
+                .load(imageUrl?: context.getString(R.string.default_image) )
                 .into(imageView)
         }
     )

@@ -38,12 +38,22 @@ android {
                 "NEWS_API_KEY",
                 localProperties.getProperty("NEWS_API_KEY")
             )
+            buildConfigField(
+                "String",
+                "WORLD_NEWS_API_KEY",
+                localProperties.getProperty("WORLD_NEWS_API_KEY")
+            )
         }
         debug{
             buildConfigField(
                 "String",
                 "NEWS_API_KEY",
                 localProperties.getProperty("NEWS_API_KEY")
+            )
+            buildConfigField(
+                "String",
+                "WORLD_NEWS_API_KEY",
+                localProperties.getProperty("WORLD_NEWS_API_KEY")
             )
         }
     }
@@ -75,6 +85,7 @@ dependencies {
     implementation(libs.play.services.location)
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.ui.test.android)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)

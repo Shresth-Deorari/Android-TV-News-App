@@ -17,6 +17,7 @@ class NewsViewModel(
     val headlines: MutableLiveData<Resource<NewsList>> = MutableLiveData()
     private var headlinesPage = 1
     private var headlinesResponse: NewsList? = null
+    private var currentCategory: String? = null
 
     private val searchNews: MutableLiveData<Resource<NewsList>> = MutableLiveData()
     private var searchNewsPage = 1
@@ -24,14 +25,19 @@ class NewsViewModel(
     private var newSearchQuery: String? = null
     private var oldSearchQuery: String? = null
 
-    fun getHeadlines(country: String) = viewModelScope.launch {
-        fetchHeadlines(country)
+    fun getHeadlines(country: String, category : String?) = viewModelScope.launch {
+        if (currentCategory != category) {
+            headlinesPage = 1
+            headlinesResponse = null
+            currentCategory = category
+        }
+        fetchHeadlines(country, category = category)
     }
 
-    private suspend fun fetchHeadlines(country: String) {
+    private suspend fun fetchHeadlines(country: String, category : String?) {
         headlines.postValue(Resource.Loading())
         try {
-            val response = newsRepository.getHeadlines(country, headlinesPage)
+            val response = newsRepository.getHeadlines(country, headlinesPage, category = category)
             headlines.postValue(handleHeadlinesResponse(response))
         } catch (e: IOException) {
             headlines.postValue(Resource.Error("Network failure: Unable to connect to the server."))
@@ -60,13 +66,15 @@ class NewsViewModel(
     private fun handleHeadlinesResponse(response: Response<NewsList>): Resource<NewsList> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                headlinesPage++
-                if (headlinesResponse == null) {
+                if (headlinesPage == 1) {
                     headlinesResponse = resultResponse
                 } else {
                     val oldArticles = headlinesResponse?.articles
                     val newArticles = resultResponse.articles
                     oldArticles?.addAll(newArticles)
+                }
+                if (headlinesResponse == resultResponse) {
+                    headlinesPage++
                 }
                 return Resource.Success(headlinesResponse ?: resultResponse)
             }

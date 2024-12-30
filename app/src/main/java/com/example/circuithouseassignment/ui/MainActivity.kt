@@ -15,17 +15,12 @@ import com.example.circuithouseassignment.viewmodel.NewsViewModelFactory
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val newsRepository = NewsRepository() // Make sure NewsRepository is properly implemented
+        val newsRepository = NewsRepository()
         val newsViewModelFactory = NewsViewModelFactory(newsRepository)
         val newsViewModel = ViewModelProvider(this, newsViewModelFactory)[NewsViewModel::class.java]
-
         setContent {
             CircuitHouseAssignmentTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize()
-                ){innerPadding->
-                    HomeScreen(innerPadding, newsViewModel)
-                }
+                    HomeScreen(Modifier.fillMaxSize(), newsViewModel)
             }
         }
     }
