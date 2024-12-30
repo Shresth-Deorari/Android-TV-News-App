@@ -2,6 +2,7 @@ package com.example.circuithouseassignment.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.darkColorScheme
@@ -17,14 +18,14 @@ fun CircuitHouseAssignmentTheme(
             primary = Purple80,
             secondary = PurpleGrey80,
             tertiary = Pink80,
-            background = BackgroundBlack
+            background = Color.Black
         )
     } else {
         lightColorScheme(
             primary = Purple40,
             secondary = PurpleGrey40,
             tertiary = Pink40,
-            background = BackgroundBlack
+            background = Color(0xFF1A161F)
         )
     }
     MaterialTheme(

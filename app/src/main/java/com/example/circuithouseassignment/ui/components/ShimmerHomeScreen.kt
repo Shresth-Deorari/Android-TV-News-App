@@ -1,12 +1,5 @@
 package com.example.circuithouseassignment.ui.components
 
-import android.widget.Space
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,18 +14,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.MaterialTheme
+import com.example.circuithouseassignment.utils.shimmerEffect
 
 @Composable
 fun ShimmerHomeScreen(
@@ -42,9 +29,9 @@ fun ShimmerHomeScreen(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(start = 58.dp, bottom = 86.dp)
+            .padding(start = 58.dp, bottom = 58.dp)
     ) {
-        Spacer(Modifier.weight(0.2f))
+        Spacer(Modifier.weight(0.45f))
         Box(
             modifier = Modifier
                 .weight(2f)
@@ -111,32 +98,5 @@ private fun ShimmerCard(
             .height(120.dp)
             .clip(RoundedCornerShape(8.dp))
             .shimmerEffect()
-    )
-}
-
-private fun Modifier.shimmerEffect(): Modifier = composed {
-    var value by remember { mutableStateOf(0f) }
-    val transition = rememberInfiniteTransition(label = "")
-    val translateAnim = transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1000f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1200, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = ""
-    )
-    value = translateAnim.value
-
-    background(
-        brush = Brush.linearGradient(
-            colors = listOf(
-                Color.LightGray.copy(alpha = 0.6f),
-                Color.LightGray.copy(alpha = 0.2f),
-                Color.LightGray.copy(alpha = 0.6f),
-            ),
-            start = Offset(value - 1000, value - 1000),
-            end = Offset(value, value),
-        )
     )
 }

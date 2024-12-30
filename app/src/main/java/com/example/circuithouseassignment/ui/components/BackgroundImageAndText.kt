@@ -13,8 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
@@ -72,25 +77,42 @@ fun BackgroundImageAndText(
                 .padding(20.dp)
         ) {
 
-//            NewsCategoryTabs(selectedCategory = NewsCategory.GENERAL)
-//            Spacer(Modifier.height(10.dp))
-
             Text(
                 "Top Headlines",
-                fontSize = 40.sp,
+                fontSize = 32.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
 
-            Spacer(modifier = Modifier.height(80.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             Text(
-                text = focusedArticle?.title ?: "",
-                fontSize = 30.sp,
+                text = buildAnnotatedString {
+                    val title = focusedArticle?.title ?: ""
+                    if (title.isNotEmpty() && title.firstOrNull()?.isLetterOrDigit() == true) {
+                        withStyle(style = SpanStyle(fontSize = 30.sp, color = Color(0xFF9C27B0), fontWeight = FontWeight.Medium)) {
+                            append(title.first())
+                        }
+                        withStyle(style = SpanStyle(fontSize = 20.sp, fontWeight = FontWeight.Medium, color = Color.White)) {
+                            append(title.drop(1))
+                        }
+                    } else {
+                        withStyle(style = SpanStyle(fontSize = 20.sp, color = Color.White, fontWeight = FontWeight.Medium)) {
+                            append(title)
+                        }
+                    }
+                },
                 fontWeight = FontWeight.Medium,
-                color = Color.White,
-                lineHeight = 36.sp,
-                modifier = Modifier
-                    .width(800.dp)
+                modifier = Modifier.width(550.dp)
+            )
+
+            Spacer(Modifier.height(15.dp))
+            Text(
+                text = focusedArticle?.description?:"",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Light,
+                color = Color.LightGray,
+                modifier = Modifier.width(650.dp),
+                maxLines = 2
             )
         }
     }

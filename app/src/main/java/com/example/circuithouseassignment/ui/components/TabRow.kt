@@ -2,7 +2,10 @@ package com.example.circuithouseassignment.ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRestorer
@@ -27,48 +30,51 @@ enum class NewsCategory(val title: String?) {
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun NewsCategoryTabs(
+    modifier: Modifier,
     selectedCategory: NewsCategory,
-    onCategorySelected: (NewsCategory) -> Unit
+    onCategorySelected: (NewsCategory) -> Unit,
 ) {
     val categories = remember { NewsCategory.entries.toTypedArray() }
-    var selectedIndex = remember{
-        categories.indexOf(selectedCategory)
-    }
+    var selectedIndex by remember { mutableStateOf(categories.indexOf(selectedCategory)) }
+    var focusedIndex by remember { mutableStateOf(selectedIndex) }
 
     TabRow(
         selectedTabIndex = selectedIndex,
         indicator = { tabPositions, doesTabRowHaveFocus ->
+            if(selectedIndex != focusedIndex){
+                TabRowDefaults.PillIndicator(
+                    currentTabPosition = tabPositions[selectedIndex],
+                    doesTabRowHaveFocus = doesTabRowHaveFocus,
+                    activeColor = Color.Black,
+                    inactiveColor = Color.Black,
+                )
+            }
             TabRowDefaults.PillIndicator(
-                currentTabPosition = tabPositions[selectedIndex],
+                currentTabPosition = tabPositions[focusedIndex],
                 doesTabRowHaveFocus = doesTabRowHaveFocus,
-                activeColor = Color.Red,
-                inactiveColor = Color.Cyan
+                activeColor = Color(0xFF6E6E6E),
+                inactiveColor = Color(0x8D525252),
             )
         },
-        modifier = Modifier
+        modifier = modifier
             .focusRestorer()
             .padding(top = 24.dp),
-        contentColor = Color.Black,
-        separator = {TabRowDefaults.TabSeparator()},
-        containerColor = Color.White
     ) {
         categories.forEachIndexed { index, category ->
             Tab(
                 selected = index == selectedIndex,
-                onFocus = {
-                    selectedIndex = index
-                },
+                onFocus = { focusedIndex = index },
                 onClick = {
-                    onCategorySelected(categories[selectedIndex])
+                    selectedIndex = index
+                    onCategorySelected(category)
                 },
                 colors = TabDefaults.pillIndicatorTabColors(),
-
             ) {
                 Text(
-                    text = category.title?:"All",
+                    text = category.title ?: "All",
                     fontSize = 16.sp,
                     modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
-                    color = Color.Black
+                    color = Color.White
                 )
             }
         }

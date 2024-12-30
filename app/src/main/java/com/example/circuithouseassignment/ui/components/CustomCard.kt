@@ -13,6 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Border
 import androidx.tv.material3.Card
 import androidx.tv.material3.CardDefaults
+import androidx.tv.material3.CardGlow
+import androidx.tv.material3.Glow
 import androidx.tv.material3.MaterialTheme
 import com.example.circuithouseassignment.models.NewsArticle
 
@@ -39,14 +41,14 @@ fun CustomCard(
                     width = 2.dp,
                     color = Color.Transparent
                 ),
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(10.dp)
             ),
             focusedBorder = Border(
                 border = BorderStroke(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.primary
+                    width = 2.dp,
+                    color = Color(0xAFFFFFFF)
                 ),
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(10.dp)
             )
         ),
         colors = CardDefaults.colors(
@@ -54,8 +56,9 @@ fun CustomCard(
             focusedContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
         ),
         scale = CardDefaults.scale(
-            focusedScale = 1.1f
+            focusedScale = 1.2f
         ),
+        glow = CardDefaults.glow(focusedGlow = Glow(elevationColor = Color(0xFF513873), elevation = 10.dp))
     ) {
         GlideImage(
             imageUrl = article.urlToImage,
