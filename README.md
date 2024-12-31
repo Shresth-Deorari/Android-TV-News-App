@@ -15,7 +15,7 @@
  - 🔄 **D-Pad Refresh** - Long press down on D-pad to refresh content 
  - ⚡ **Smooth Loading** - Elegant shimmer effects during content loading 
   
-## Demo Video
+## Demo Video - Youtube
 
 [![Watch the demo](https://img.youtube.com/vi/sKM09rPNyFA/0.jpg)](https://youtu.be/sKM09rPNyFA)
   
