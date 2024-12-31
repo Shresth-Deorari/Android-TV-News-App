@@ -1,6 +1,5 @@
 package com.example.circuithouseassignment.ui.components
 
-import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,11 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
+import androidx.core.text.isDigitsOnly
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.example.circuithouseassignment.models.NewsArticle
@@ -89,11 +87,19 @@ fun BackgroundImageAndText(
                 text = buildAnnotatedString {
                     val title = focusedArticle?.title ?: ""
                     if (title.isNotEmpty() && title.firstOrNull()?.isLetterOrDigit() == true) {
+                        var annotated : String = ""
+                        annotated += title.first()
+                        if (annotated.isDigitsOnly()){
+                            var ind = 1
+                            while(title[ind]!= ' '){
+                                annotated += title[ind++]
+                            }
+                        }
                         withStyle(style = SpanStyle(fontSize = 30.sp, color = Color(0xFF9C27B0), fontWeight = FontWeight.Medium)) {
-                            append(title.first())
+                            append(annotated)
                         }
                         withStyle(style = SpanStyle(fontSize = 20.sp, fontWeight = FontWeight.Medium, color = Color.White)) {
-                            append(title.drop(1))
+                            append(title.drop(annotated.length))
                         }
                     } else {
                         withStyle(style = SpanStyle(fontSize = 20.sp, color = Color.White, fontWeight = FontWeight.Medium)) {
