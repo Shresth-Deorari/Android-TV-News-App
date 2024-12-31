@@ -27,7 +27,11 @@
      <td><img src="assets/SS2.png" alt="Category View" /></td> 
    </tr> 
  </table> 
-  
+
+## Documentation
+
+You can view the full documentation of Steps taken, Problems Faced and Fixes Used here: [Download PDF](path/to/your/documentation.pdf)
+ 
  ## Architecture & Technical Stack 
   
  - **Architecture Pattern**: MVVM (Model-View-ViewModel) 
