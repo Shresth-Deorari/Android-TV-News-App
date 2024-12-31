@@ -101,9 +101,6 @@ dependencies {
     //News Api Dependency
     implementation(libs.news.api.java)
 
-    //Room Database
-    implementation(libs.androidx.room.runtime)
-
     //Okhttp
     implementation(libs.okhttp)
 
@@ -112,4 +109,7 @@ dependencies {
 
     //Glide
     implementation(libs.compose)
+
+    //Splash Screen
+    implementation( libs.androidx.core.splashscreen)
 }

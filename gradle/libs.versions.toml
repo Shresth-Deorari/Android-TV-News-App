@@ -3,6 +3,7 @@ agp = "8.7.3"
 compose = "1.0.0-beta01"
 converterGson = "2.9.0"
 converterScalars = "2.9.0"
+coreSplashscreen = "1.0.1"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
 appcompat = "1.6.1"
@@ -25,6 +26,7 @@ uiTestAndroid = "1.7.6"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
