@@ -17,9 +17,7 @@
   
 ## Demo Video
 
-<video width="640" height="360" controls>
-  <source src="assets/demo.mp4" type="video/mp4">
-</video>
+[![Watch the demo](https://img.youtube.com/vi/sKM09rPNyFA/0.jpg)](https://youtu.be/sKM09rPNyFA)
   
  ## Screenshots 
   
