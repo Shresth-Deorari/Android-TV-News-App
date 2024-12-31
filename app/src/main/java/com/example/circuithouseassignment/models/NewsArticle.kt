@@ -1,14 +1,6 @@
 package com.example.circuithouseassignment.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-
-@Entity(
-    tableName = "articles"
-)
 data class NewsArticle(
-    @PrimaryKey(autoGenerate = true)
     val id : Int? = null,
     val author: String?,
     val content: String,
