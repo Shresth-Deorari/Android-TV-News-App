@@ -30,6 +30,7 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.tv.material3.MaterialTheme
@@ -54,6 +55,7 @@ fun HomeScreen(modifier: Modifier, newsViewModel: NewsViewModel) {
     val newsListFocusRequester = remember { FocusRequester() }
     var keyPressJob by remember { mutableStateOf<Job?>(null) }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     LaunchedEffect(selectedCategory) {
         newsViewModel.getHeadlines("us",  selectedCategory.title)
@@ -133,7 +135,8 @@ fun HomeScreen(modifier: Modifier, newsViewModel: NewsViewModel) {
                                         if (isFocused) {
                                             focusedArticle = article
                                         }
-                                    }
+                                    },
+                                    context
                                 )
                             }
                         }

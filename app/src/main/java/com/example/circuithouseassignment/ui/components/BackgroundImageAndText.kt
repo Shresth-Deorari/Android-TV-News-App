@@ -87,7 +87,7 @@ fun BackgroundImageAndText(
                 text = buildAnnotatedString {
                     val title = focusedArticle?.title ?: ""
                     if (title.isNotEmpty() && title.firstOrNull()?.isLetterOrDigit() == true) {
-                        var annotated : String = ""
+                        var annotated = ""
                         annotated += title.first()
                         if (annotated.isDigitsOnly()){
                             var ind = 1

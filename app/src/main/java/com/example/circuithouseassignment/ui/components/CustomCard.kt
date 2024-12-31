@@ -1,5 +1,10 @@
 package com.example.circuithouseassignment.ui.components
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -13,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Border
 import androidx.tv.material3.Card
 import androidx.tv.material3.CardDefaults
-import androidx.tv.material3.CardGlow
 import androidx.tv.material3.Glow
 import androidx.tv.material3.MaterialTheme
 import com.example.circuithouseassignment.models.NewsArticle
@@ -22,11 +26,20 @@ import com.example.circuithouseassignment.models.NewsArticle
 fun CustomCard(
     article: NewsArticle,
     modifier: Modifier = Modifier,
-    onFocusChange: (Boolean) -> Unit = {}
+    onFocusChange: (Boolean) -> Unit = {},
+    context: Context
 ) {
     Card(
         onClick = {
-
+                try {
+                    val intent = Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse(article.url)
+                    }
+                    context.startActivity(intent)
+                } catch (e: Exception) {
+                    Log.e("CustomCard", "Error opening URL: ${e.message}")
+                    Toast.makeText(context, "Unable to open browser", Toast.LENGTH_SHORT).show()
+                }
         },
         modifier = modifier
             .width(220.dp)
